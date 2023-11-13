@@ -481,6 +481,7 @@ input[type=checkbox] {
 .fshr__icon--style-shevron {
   margin:0.35rem 0 ;
   width: 24px;
+  height: 24;
   vertical-align: middle;
 }
 
