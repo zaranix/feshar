@@ -78,7 +78,7 @@
     color: var(--color-success);
     text-align: center;
      width: 100%;
-     display: block !important;
+     
     
   }
 
@@ -623,6 +623,9 @@ input[type=checkbox] {
 
 
 /* Progress Bar*/
+.fshr__loading-circle{
+  width: 2rem;
+}
 .fshr__container--ProgressBar {
   font-size: 1.35rem;
   padding: 2.5rem 0 2rem 0;

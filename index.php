@@ -17,7 +17,7 @@
   
   <body>
     <div id="fshr__fonts">
-      <div class="fshr__container--all fshr__border__container">
+      <div id="upload-box" class="fshr__container--all fshr__border__container">
         <div class="fshr__container--background fshr__box__contain">
           <div class="fshr__bt__container">
             <div class="fshr__dropdown fshr__collapsible--expanded">
@@ -80,39 +80,9 @@
 
        
       
-      <div style="display:none;" class="fshr__containerpanel fshr__border__container">
-        <div class="container--background">
-          <div class="box__container">
-            <div class="fshr__grid fshr__grid--1x4">
-              <div class="fshr__bt--container">
-                <button class="fshr__btn--fshr">Download JPG</button>
-              </div>
-          
-              <div class="fshr__size__container">
-                <div class="fshr__tooltip fshr__badge-item__action fshr__badge--linethrough">
-                  21.4955 KB
-                  <span class="fshr__tooltiptext fshr__tooltiptext--badge">سایز قبلی</span>
-                </div>
-                <div class="fshr__tooltip fshr__badge-item__action">
-                  154.49 KB
-                  <span class="fshr__tooltiptext fshr__tooltiptext--badge">سایز جدید</span>
-                </div>
-              </div>
-              <div class="success__container">
-                <div class="fshr__tooltip fshr__badge-item__status fshr__success" >
-                   50% کاهش
-                  <span class="fshr__tooltiptext">Done</span>
-                </div>
-              </div>
-              <div class="fshr__tooltip fshr__badge-item__name">
-                image.jpg
-                <span class="fshr__tooltiptext fshr__tooltiptext--name"> image.jpg</span>
-              </div>
-  
-             
-            </div>
+      <div style="display;" class="fshr__containerpanel fshr__border__container">
+        <div id="output-list" class="container--background">
         
-          </div>
           <div class="fshr__btn__container1">
             <div class="fshr__btn1__container">
               <div class="fshr__bt--container">
@@ -128,72 +98,8 @@
           </div>
         </div>
      </div>
-     <div style="display:none;" class="fshr__containerpanel fshr__border__container">
-      <div class="container--background">
-        <div class="box__container">
-          <div class="fshr__grid2 fshr__grid--1x4">
-            <div class="fshr__bt--container">
-              <button class="fshr__btn--fshr fshr__unclickableBtn">Download JPG</button>
-            </div>
-        
-     
-            <div class="fshr__container--ProgressBar">
-              <p class="fshr__text--uploading">در حال بارگذاری <img class="fshr__icon--uploading" src="images/download (9).svg" alt=""></p>
-              <div class="fshr__progress-bar__container">
-                <div class="fshr__progress-bar">
-                </div>
-              </div>
-            </div>
-            <div class="fshr__tooltip fshr__badge-item__name">
-              image.jpg
-              <span class="fshr__tooltiptext fshr__tooltiptext--name"> image.jpg</span>
-            </div>
-
-           
-          </div>
-        </div>
-        <div class="box__container">
-          <div class="fshr__grid2 fshr__grid--1x4">
-            <div class="fshr__bt--container">
-              <button class="fshr__btn--fshr fshr__unclickableBtn">Download JPG</button>
-            </div>
-     
-            <div class="fshr__container--ProgressBar">
-              <p class="fshr__text--ready">در حال آماده سازی </p>
-              <div class="fshr__progress-bar__container fshr__progress-bar__container--ready">
-                <div class="fshr__progress-bar">
-                </div>
-              </div>
-            </div>
-            <div class="fshr__tooltip fshr__badge-item__name">
-              billionphoto...882951 (1).jpg
-              <span class="fshr__tooltiptext fshr__tooltiptext--name"> billionphoto...882951 (1).jpg</span>
-            </div>
-
-           
-          </div>
-        </div>
-    
-
-     
    
-        <div class="fshr__btn__container1">
-          <div class="fshr__btn1__container">
-            <div class="fshr__bt--container">
-              <button class="fshr__btn--fshr btn--fshr-2 fshr__unclickableBtn">
-                <img class="fshr__ico--style" src="images/download-icon.svg" alt="" />
-                دانلود همه
-              </button>
-            </div>
-   
-        
-          </div>
-  
-        </div>
-      </div>
-   </div>
-   
-   <div class="fshr__containerpanel fshr__border__container">
+   <div id="compress-box" class="fshr__containerpanel fshr__border__container">
    
     <div class="fshr__bt__container fshr__bt2__container">
      
@@ -326,6 +232,7 @@
     </div>
   </div>
 </div>
+
 <script src="js/main.js"></script>
   </body>
 </html>
