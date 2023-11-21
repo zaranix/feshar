@@ -80,13 +80,13 @@
 
        
       
-      <div style="display;" class="fshr__containerpanel fshr__border__container">
+      <div id="output-box" style="display:none;" class="fshr__containerpanel fshr__border__container">
         <div id="output-list" class="container--background">
         
           <div class="fshr__btn__container1">
             <div class="fshr__btn1__container">
               <div class="fshr__bt--container">
-                <button class="fshr__btn--fshr btn--fshr-2">
+                <button id="downloadall" class="fshr__btn--fshr btn--fshr-2 fshr__unclickableBtn">
                   <img class="fshr__ico--style" src="images/download-icon.svg" alt="" />
                   دانلود همه
                 </button>
@@ -99,7 +99,7 @@
         </div>
      </div>
    
-   <div id="compress-box" class="fshr__containerpanel fshr__border__container">
+   <div style="display:none;" id="compress-box" class="fshr__containerpanel fshr__border__container">
    
     <div class="fshr__bt__container fshr__bt2__container">
      
@@ -147,11 +147,11 @@
             type="file"
             multiple
             name="uploadfile"
-            id="img"
+            id="img-upload2"
             style="display: none"
             accept="image/*"
           />
-          <label class="fshr__btn--fshr fshr__btn_right--smooth2 fshr__btn--gray" for="img">
+          <label class="fshr__btn--fshr fshr__btn_right--smooth2 fshr__btn--gray" for="img-upload2">
             <img
               class="fshr__icon--style"
               src="images/pocketblue.svg"

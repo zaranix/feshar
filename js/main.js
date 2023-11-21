@@ -12,6 +12,7 @@ const Data ={
   push_com_image(id, name, url, before_size, after_size){
     this.compressed_images.push({id: id, name: name, url: url, before_size: before_size , after_size: after_size})
   },
+ 
   remove_image(id){
     let i = this.images.findIndex((elem) =>{
       elem.id == id
@@ -22,8 +23,25 @@ const Data ={
   find_com_image(id){
     let image = this.compressed_images.find((elem) => {return (elem.id == id)})
     return image;
+  },
+  get_urls(){
+    let url_list = this.compressed_images.forEach(e => {
+    return e.url
+   });
+   return url_list;
   }
   }
+
+// Normalize the bytes to more human readable
+function normalizeBytes(bytes) {
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+
+  if (bytes === 0) return '0 Byte';
+  
+  const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+  
+  return Math.round((bytes / Math.pow(1024, i)) * 100) / 100 + ' ' + sizes[i];
+}
 
 
 // Create a queue item and add it to queue-list (html element)
@@ -41,7 +59,7 @@ function createQueueItem(id, file_name, file_size){
             </div>
             <div  class="fshr__size__container">
               <div class="fshr__tooltip fshr__badge-item__action">
-              ${file_size} 
+              ${normalizeBytes(file_size)} 
               </div>
             </div>
             <div class="fshr__tooltip fshr__badge-item__name">
@@ -109,15 +127,54 @@ function changeStatusOfOutItem(id){
   let image = Data.find_com_image(id);
   item.querySelector("img").style.display= "none";
   item.querySelector("div.fshr__success").style.display= "inline-block";
-  item.querySelector("div.fshr__before_size").textContent= image.before_size;
-  item.querySelector("div.fshr__after_size").textContent= image.after_size;
+  item.querySelector("div.fshr__success").textContent= `‌کاهش ${Math.round((image.before_size - image.after_size)/ image.before_size *100)}%`;
+  item.querySelector("div.fshr__before_size").textContent= normalizeBytes(image.before_size);
+  item.querySelector("div.fshr__after_size").textContent= normalizeBytes(image.after_size);
   item.querySelector("button").classList.remove("fshr__unclickableBtn");
   item.querySelector("a").setAttribute("href", image.url);
+}
+
+// Change status of button downloadAll
+function changeStatusOfButtonDownloadAll(){
+  let DownloadAllBtn = document.getElementById("downloadall");
+  DownloadAllBtn.classList.remove("fshr__unclickableBtn");
+  DownloadAllBtn.addEventListener("click", DownloadAllImages);
 
 }
 
+// Download all images
+function DownloadAllImages() {
+
+ function dowmnlaodImage(image){
+  var link = document.createElement("a");
+  link.href = image.url;
+  link.download = image.name
+  link.target = "_blank";
+  link.click();
+ }
+ console.log("download started")
+ Data.compressed_images.forEach((elem) => {
+  dowmnlaodImage(elem)
+})
+}
+
+
 // Event on uploading image
 document.getElementById("img-upload").addEventListener("change", function () {
+    for (let i = 0; i < this.files.length; i++) {
+      // Push new image to images list
+      Data.push_image(this.files[i]);
+      //Create queueItem
+      createQueueItem(Data.last_id-1, this.files[i].name, this.files[i].size);
+    
+    }
+    document.getElementById("upload-box").style.display = "none"
+    document.getElementById("compress-box").style.display = "block"
+
+})
+
+// Event on uploading image for second upload input
+document.getElementById("img-upload2").addEventListener("change", function () {
     for (let i = 0; i < this.files.length; i++) {
       // Push new image to images list
       Data.push_image(this.files[i]);
@@ -138,8 +195,11 @@ document.getElementById("submit-btn").addEventListener("click", () =>{
   // Disappear the upload-box and compress-box
   document.getElementById("upload-box").style.display = "none"
   document.getElementById("compress-box").style.display = "none"
+  document.getElementById("output-box").style.display = "block"
 
-  for (let i = 0 ; i< Data.images.length; i++){
+  let length = Data.images.length;
+  let recieved = 0;
+  for (let i = 0 ; i< length; i++){
   let id = Data.images[i].id
   let name = Data.images[i].file.name
   let formData= new FormData();
@@ -159,13 +219,14 @@ document.getElementById("submit-btn").addEventListener("click", () =>{
       Data.remove_image(id)
       // Push the image to compressed_images
       Data.push_com_image(id,name,msg.compressed_image_url, msg.before_size, msg.after_size)
-      
-      // console.log(Data.compressed_images.url)
       console.log(Data.compressed_images)
-    
       // Change state of output item 
       changeStatusOfOutItem(id);
-      
+      recieved++;
+      if(recieved==length){
+        //dowmnlaod all activated
+        changeStatusOfButtonDownloadAll()
+      }
 
 
     },
@@ -173,8 +234,14 @@ document.getElementById("submit-btn").addEventListener("click", () =>{
         var errorData = $.parseJSON(xhr.responseText);
         console.log(errorData.data)
         console.log(msg)
+        recieved++;
+        if(recieved==length){
+          //dowmnlaod all activated
+          changeStatusOfButtonDownloadAll()
+        }
         //$("#ma").text(errorData.data);
     },
+
     cache: false,
     contentType: false,
     processData: false

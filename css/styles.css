@@ -62,6 +62,10 @@
     padding: 1rem;
     order: -1;
     text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: -webkit-fill-available;
   }
   .fshr__badge-item__action{
    color: var(--color-body-content);
